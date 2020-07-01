@@ -1,25 +1,32 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="jumbotron">
-        <img src="Images/LOGO_OPTIMHUM_HD_base.gif" width="20%" alt="Logo Optim'hum">
-        <h1 class="display-4 text-center">Bonjour à vous !</h1>
-        <p class="lead">Bienvenue sur notre site d'évaluation des formations</p>
-        <hr class="my-4">
-        <form>
-            <fieldset>
-                <legend class="text-center">Saisissez les informations de votre compte !</legend>
-                <div class="form-group">
-                    <label for="exampleInputEmail1">Votre adresse mail</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Saisir votre mail">
-                    <small id="emailHelp" class="form-text text-muted">Nous ne communiquons jamais les adresses emails.</small>
-                </div>
-                <div class="form-group">
-                    <label for="exampleInputPassword1">Mot de passe</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Mot de passe">
-                </div>
-                <button type="submit" class="btn btn-primary">Valider vos informations</button>
-            </fieldset>
-        </form>
+    <div class="container">
+        <div class="jumbotron">
+            <img src="Images/LOGO_OPTIMHUM_HD_base.gif" width="20%" alt="Logo Optim'hum">
+            <h1 class="display-4 text-center">Bonjour à vous !</h1>
+            <p class="lead">Bienvenue sur notre site d'évaluation des formations</p>
+            <hr class="my-4">
+            {% if hasError %}
+                <div class="alert alert-danger">Une erreur est survenue, L'identifiant ou le mot de passe est invalide.</div>
+            {% endif %}
+            <form action="{{ path('homepage') }}" method="POST">
+                <fieldset>
+                    <legend class="text-center">Saisissez les informations de votre compte !</legend>
+                    <div class="form-group">
+                        <label for="Email">Votre adresse mail</label>
+                        <input type="email" name="_username" class="form-control" id="Email" aria-describedby="emailHelp" placeholder="Saisir votre mail" required value="{{username}}">
+                        <small id="emailHelp" class="form-text text-muted">Nous ne communiquons jamais les adresses emails.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="Password1">Mot de passe</label>
+                        <input type="password" name="_password" class="form-control" id="Password1" placeholder="Mot de passe" required>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success">Connexion</button>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
     </div>
 {% endblock %}
